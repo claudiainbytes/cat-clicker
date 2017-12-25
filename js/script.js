@@ -3,7 +3,7 @@ var $catBox = $('#cat-box');
 var $numClicks = $('#numClicks');
 var $preloader = $('.preload');
 var $catAlert = $('.cat-alert');
-var catApiUrl = 'http://thecatapi.com/api/images/get?apikey=MjU5NDgz&format=xml&type=gif';
+var catApiUrl = 'https://thecatapi.com/api/images/get?apikey=MjU5NDgz&format=xml&type=gif';
 
 var getClicks = function(c) {
     c++;
