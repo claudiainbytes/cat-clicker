@@ -3,7 +3,7 @@ var $catBox = $('#cat-box');
 var $numClicks = $('#numClicks');
 var $preloader = $('.preload');
 var $catAlert = $('.cat-alert');
-var catApiUrl = 'https://thecatapi.com/api/images/get?apikey=MjU5NDgz&format=xml&type=gif';
+var catApiUrl = 'http://thecatapi.com/api/images/get?apikey=MjU5NDgz&format=xml&type=gif';
 
 var getClicks = function(c) {
     c++;
@@ -33,7 +33,6 @@ var changeImage = function() {
             dataType: "xml",
             success: function(xml) {
                 newCatUrl = $(xml).find('url').text();
-                newCatUrl = newCatUrl.replace("http", "https");
                 $cat.attr('src', newCatUrl);
                 clearTimeout(catApiFail);
                 $cat.error(function(){
