@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat Clicker</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+    <link rel="stylesheet" href="public/milligram/dist/milligram.min.css">
+    <link rel="stylesheet" href="public/milligram/examples/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+</head>
+<body>
+    <main class="wrapper">
+
+    <nav class="navigation">
+    <section class="container">
+      <a class="navigation-title" href="/">
+        <i class="fa fa-github fa-lg" aria-hidden="true"></i>
+        &nbsp;
+        <h1 class="title">Cat Clicker</h1>
+      </a>
+    </section>
+    </nav>
+
+    <section class="container" id="examples">
+        <div class="row">
+            <div class="column column-20"></div>
+            <div class="column column-60">
+                <p class="text-centered">If you see a cat, press click on the image</p>
+            </div>
+            <div class="column column-20"></div>
+        </div>
+         <div class="row">
+            <div class="column column-20"></div>
+            <div class="column column-60 cat-centered">
+                <div class="preload"></div>
+                <div id="cat-box">
+                    <img src="http://thecatapi.com/api/images/get?apikey=MjU5NDgz&format=src&type=gif&size=full" id="cat" width="100%" height="auto" alt="Press click on the cat image">
+                    <br>
+                    <button class="centered-button" id="numClicks" value="0">0</button>
+                </div>
+                <p class="cat-alert text-centered"></p>
+            </div>
+            <div class="column column-20"></div>
+        </div>
+        <div class="row">
+            <div class="column column-20"></div>
+            <div class="column column-60">
+                <p class="text-centered">Developed by <a target="_blank" href="http://www.claudiainbytes.com" title="ClaudiaInBytes">ClaudiaInBytes</a>. </p>
+            </div>
+            <div class="column column-20"></div>
+        </div>
+
+    </section>
+
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://milligram.github.io/scripts/main.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
