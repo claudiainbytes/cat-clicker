@@ -33,7 +33,7 @@ var changeImage = function() {
             dataType: "xml",
             success: function(xml) {
                 newCatUrl = $(xml).find('url').text();
-                newCatUrl.replace("http", "https");
+                newCatUrl = newCatUrl.replace("http", "https");
                 $cat.attr('src', newCatUrl);
                 clearTimeout(catApiFail);
                 $cat.error(function(){
