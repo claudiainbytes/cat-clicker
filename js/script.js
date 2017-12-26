@@ -1,51 +1,72 @@
-var $cat = $('#cat');
-var $catBox = $('#cat-box');
-var $numClicks = $('#numClicks');
+var $cat = $('.cat');
+var $catBox = $('.cat-box');
+var $catName = $('.cat-name');
+var $numClicks = $('.numClicks');
 var $preloader = $('.preload');
 var $catAlert = $('.cat-alert');
 var catApiUrl = 'http://thecatapi.com/api/images/get?apikey=MjU5NDgz&format=xml&type=gif';
 
-var getClicks = function(c) {
-    c++;
-    $numClicks.val(c);
-    $numClicks.html(c);
+function Kitty(name, img, clicks, id) {
+    this.name = name;
+    this.img = img;
+    this.clicks = clicks;
+    this.id = id;
+}
+
+Kitty.prototype.showImage = function() {
+    $(this.id).find($preloader).fadeOut(1000);
+    $(this.id).find($catBox).fadeIn(1000);
 };
 
-var getCatAlert = function(message) {
-    $catAlert.text(message);
-    $catAlert.show();
+Kitty.prototype.hideImage =function() {
+    $(this.id).find($preloader).fadeIn(1000);
+    $(this.id).find($catBox).fadeOut(1000);
 };
 
-var changeImage = function() {
+Kitty.prototype.getName = function() {
+    $(this.id).find($catName).text(this.name.toUpperCase());
+};
+
+Kitty.prototype.getClicks = function() {
+    this.clicks++;
+    $(this.id).find($numClicks).text(this.clicks);
+};
+
+Kitty.prototype.getCatAlert = function(message) {
+    $(this.id).find($catAlert).text(message);
+    $(this.id).find($catAlert).show();
+};
+
+Kitty.prototype.changeImage = function() {
     var newCatUrl = "";
 
+    var self = this;
+
     var catApiFail = setTimeout(function(){
-        getCatAlert("Failed to load image");
+        self.getCatAlert("Failed to load image");
     }, 8000);
 
-    $preloader.fadeIn(1000);
-    $catBox.fadeOut(1000);
+    this.hideImage();
 
     $.ajax({
             type: "GET",
-            url: catApiUrl,
+            url: this.img,
             cache: false,
             dataType: "xml",
             success: function(xml) {
                 newCatUrl = $(xml).find('url').text();
-                $cat.attr('src', newCatUrl);
+                $(self.id).find($cat).attr('src', newCatUrl);
                 clearTimeout(catApiFail);
-                $cat.error(function(){
+                $(self.id).find($cat).error(function(){
                     $(this).attr('src', 'img/missing.jpg');
                 });
-                $cat.ready(function() {
+                $(self.id).find($cat).ready(function() {
                     clearTimeout(catApiFail);
-                    $preloader.fadeOut(1000);
-                    $catBox.fadeIn(1000);
+                    self.showImage();
                 });
             },
             error: function() {
-                $cat.error(function(){
+                $(self.id).find($cat).error(function(){
                     $(this).attr('src', 'img/missing.jpg');
                 });
             }
@@ -53,15 +74,27 @@ var changeImage = function() {
 
 };
 
-$preloader.fadeIn(1000);
-$catBox.fadeOut(1000);
+var cat1 = new Kitty("Peaches", catApiUrl, 0, "#cat1");
+var cat2 = new Kitty("Golden", catApiUrl, 0, "#cat2");
+
+cat1.getName();
+cat2.getName();
+
+cat1.hideImage();
+cat2.hideImage();
 
 $(window).on('load',function() {
-    $preloader.fadeOut(1000);
-    $catBox.fadeIn(1000);
+    cat1.showImage();
+    cat2.showImage();
 });
 
-$cat.click(function() {
-    getClicks($numClicks.val());
-    changeImage();
+$(cat1.id).find($cat).click(function() {
+    cat1.getClicks();
+    cat1.changeImage();
 });
+
+$(cat2.id).find($cat).click(function() {
+    cat2.getClicks();
+    cat2.changeImage();
+});
+
